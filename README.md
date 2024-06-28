@@ -10,4 +10,5 @@
 ## About This Project
 
 Events management using Laravel 10.3, with Rest API
+I used MySqlite connection, open the Database with DB Browser
 
