@@ -3,16 +3,10 @@
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\AttendeeController;
-use App\Http\Controllers\api\UserController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
-/*
-    We define the routes in the api file
-    provider classes they tell laravel how to behave and what to do
-    RouteServiceProvider is in charge for the default config of routing api
-*/
-
-Route::middleware('auth:sanctum')->get('/user', function(Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 

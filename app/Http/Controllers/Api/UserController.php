@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use http\Client\Curl\User;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\User; // Ensure the User model is imported correctly
 use Illuminate\Support\Facades\DB;
 
-class UserController
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,18 +21,13 @@ class UserController
     /**
      * Store a newly created resource in storage.
      */
-
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
-        //first I take the resource as input
         $name = $request->input('name');
         $surname = $request->input('surname');
         $email = $request->input('email');
         $password = bcrypt($request->input('password')); // Encrypt the password
         $dateOfBirth = $request->input('dateOfBirth');
-
-        //then I pass them as object and I create it with the directive Model::create as array
-        //associative array in laravel
 
         $user = User::create([
             'name' => $name,
@@ -43,7 +37,7 @@ class UserController
             'date_of_birth' => $dateOfBirth,
         ]);
 
-        return redirect('/users');
+        return response()->json($user, 201); // Return the created user with a 201 status code
     }
 
     /**
@@ -51,30 +45,24 @@ class UserController
      */
     public function show(string $id)
     {
-        //I look from the table users with the specified id and i assign it to a variable
         $user = DB::table('users')->where('id', $id)->first();
         if ($user) {
-            //I return the User with the id found if found
             return response()->json($user);
         }
-        // I respond not found if he doesnt exists
         return response()->json(['message' => 'User not found'], 404);
     }
-
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id): RedirectResponse
+    public function update(Request $request, string $id)
     {
-        //I create a user object, I am looking to find the id of it
         $user = User::find($id);
         if ($user) {
-            //If It's found I take the input of the new attributes
-            $user->update($request->only(['name', 'surname', 'email', 'password', 'dateOfBirth']));
-            return redirect('/users');
+            $user->update($request->only(['name', 'surname', 'email', 'password', 'date_of_birth']));
+            return response()->json($user);
         }
-        return redirect('/users')->withErrors(['message' => 'User not found']);
+        return response()->json(['message' => 'User not found'], 404);
     }
 
     /**

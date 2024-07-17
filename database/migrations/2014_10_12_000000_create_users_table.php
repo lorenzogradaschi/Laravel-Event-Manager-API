@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('surname'); // Add surname column
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->date('date_of_birth'); // Add date_of_birth column
             $table->rememberToken();
             $table->timestamps();
         });

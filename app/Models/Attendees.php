@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Notifications\Notifiable;
 
 class Attendee extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
 
     protected $fillable = [
         'numbersOfAttendees',
@@ -17,10 +16,9 @@ class Attendee extends Model
         'user_id',
     ];
 
-    // Relationships
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class); // A user can attend many events
+        return $this->belongsTo(User::class);
     }
 
     public function event(): BelongsTo

@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Attendee;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Http\RedirectResponse;
 
 class AttendeeController extends Controller
 {
@@ -22,21 +20,19 @@ class AttendeeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
-        // First, take the resource as input
         $numberOfAttendees = $request->input('numbersOfAttendees');
         $event_id = $request->input('event_id');
         $user_id = $request->input('user_id');
 
-        // Then, pass them as an object and create it with the directive Model::create as an associative array
         $attendee = Attendee::create([
             'numbersOfAttendees' => $numberOfAttendees,
             'event_id' => $event_id,
             'user_id' => $user_id,
         ]);
 
-        return redirect('/attendees');
+        return response()->json($attendee, 201);
     }
 
     /**
@@ -48,9 +44,8 @@ class AttendeeController extends Controller
 
         if ($attendee) {
             return response()->json($attendee);
-        } else {
-            return response()->json(['message' => 'Attendee not found'], 404);
         }
+        return response()->json(['message' => 'Attendee not found'], 404);
     }
 
     /**
@@ -62,10 +57,9 @@ class AttendeeController extends Controller
 
         if ($attendee) {
             $attendee->update($request->only(['numbersOfAttendees', 'event_id', 'user_id']));
-            return response()->json(['message' => 'Attendee updated successfully']);
-        } else {
-            return response()->json(['message' => 'Attendee not found'], 404);
+            return response()->json($attendee);
         }
+        return response()->json(['message' => 'Attendee not found'], 404);
     }
 
     /**
@@ -78,8 +72,7 @@ class AttendeeController extends Controller
         if ($attendee) {
             $attendee->delete();
             return response()->json(['message' => 'Attendee deleted successfully']);
-        } else {
-            return response()->json(['message' => 'Attendee not found'], 404);
         }
+        return response()->json(['message' => 'Attendee not found'], 404);
     }
 }
