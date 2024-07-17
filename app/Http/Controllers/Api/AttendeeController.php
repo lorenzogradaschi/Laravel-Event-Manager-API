@@ -22,14 +22,16 @@ class AttendeeController extends Controller
      */
     public function store(Request $request)
     {
-        $numberOfAttendees = $request->input('numbersOfAttendees');
-        $event_id = $request->input('event_id');
-        $user_id = $request->input('user_id');
+        $request->validate([
+            'numbersOfAttendees' => 'required|integer|min:1',
+            'event_id' => 'required|exists:events,id',
+            'user_id' => 'required|exists:users,id'
+        ]);
 
         $attendee = Attendee::create([
-            'numbersOfAttendees' => $numberOfAttendees,
-            'event_id' => $event_id,
-            'user_id' => $user_id,
+            'numbersOfAttendees' => $request->numbersOfAttendees,
+            'event_id' => $request->event_id,
+            'user_id' => $request->user_id,
         ]);
 
         return response()->json($attendee, 201);
@@ -53,6 +55,12 @@ class AttendeeController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'numbersOfAttendees' => 'sometimes|required|integer|min:1',
+            'event_id' => 'sometimes|required|exists:events,id',
+            'user_id' => 'sometimes|required|exists:users,id'
+        ]);
+
         $attendee = Attendee::find($id);
 
         if ($attendee) {

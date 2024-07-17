@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class EventController extends Controller
 {
@@ -23,16 +22,20 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        $name = $request->input('name');
-        $description = $request->input('description');
-        $start_time = $request->input('start_time');
-        $end_time = $request->input('end_time');
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'start_time' => 'required|date_format:Y-m-d H:i:s',
+            'end_time' => 'required|date_format:Y-m-d H:i:s|after:start_time',
+            'user_id' => 'required|exists:users,id'
+        ]);
 
         $event = Event::create([
-            'name' => $name,
-            'description' => $description,
-            'start_time' => $start_time,
-            'end_time' => $end_time,
+            'name' => $request->name,
+            'description' => $request->description,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
+            'user_id' => $request->user_id
         ]);
 
         return response()->json($event, 201);
@@ -56,10 +59,18 @@ class EventController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'name' => 'sometimes|required|string|max:255',
+            'description' => 'nullable|string',
+            'start_time' => 'sometimes|required|date_format:Y-m-d H:i:s',
+            'end_time' => 'sometimes|required|date_format:Y-m-d H:i:s|after:start_time',
+            'user_id' => 'sometimes|required|exists:users,id'
+        ]);
+
         $event = Event::find($id);
 
         if ($event) {
-            $event->update($request->only(['name', 'description', 'start_time', 'end_time']));
+            $event->update($request->only(['name', 'description', 'start_time', 'end_time', 'user_id']));
             return response()->json($event);
         }
         return response()->json(['message' => 'Event not found'], 404);

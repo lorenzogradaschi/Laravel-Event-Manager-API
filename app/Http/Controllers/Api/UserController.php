@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User; // Ensure the User model is imported correctly
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -23,18 +24,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $name = $request->input('name');
-        $surname = $request->input('surname');
-        $email = $request->input('email');
-        $password = bcrypt($request->input('password')); // Encrypt the password
-        $dateOfBirth = $request->input('dateOfBirth');
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'surname' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8',
+            'dateOfBirth' => 'required|date',
+        ]);
 
         $user = User::create([
-            'name' => $name,
-            'surname' => $surname,
-            'email' => $email,
-            'password' => $password,
-            'date_of_birth' => $dateOfBirth,
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'date_of_birth' => $request->dateOfBirth,
         ]);
 
         return response()->json($user, 201); // Return the created user with a 201 status code
