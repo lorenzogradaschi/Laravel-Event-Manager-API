@@ -70,3 +70,10 @@ curl -X POST "http://localhost:8000/api/user" \
   "password": "password123",
   "dateOfBirth": "2000-01-01"
 }'
+```
+## Additional Improveents:
+### Authentication: Implement user authentication using Laravel Passport or Sanctum.
+```bash
+composer require laravel/sanctum
+```
+### Testing: Write unit and feature tests for your controllers and models.
