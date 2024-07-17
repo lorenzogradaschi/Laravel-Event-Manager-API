@@ -20,7 +20,7 @@ Description: Create a new user.
 
 Request:
 
-curl -X POST "http://localhost/api/user" \
+curl -X POST "http://localhost:8000/api/user" \
 -H "Content-Type: application/json" \
 -d '{
   "name": "New User",
@@ -47,7 +47,7 @@ Description: Create a new event.
 
 Request:
 
-curl -X POST "http://localhost/api/events" \
+curl -X POST "http://localhost:8000/api/events" \
 -H "Content-Type: application/json" \
 -d '{
   "name": "Event Name",
@@ -72,7 +72,7 @@ Description: Create a new attendee for a specific event.
 
 Request:
 
-curl -X POST "http://localhost/api/events/1/attendees" \
+curl -X POST "http://localhost:8000/api/events/1/attendees" \
 -H "Content-Type: application/json" \
 -d '{
   "name": "Attendee Name",
@@ -96,7 +96,7 @@ Endpoint: GET /api/user/{id}
 Request:
 
 
-curl -X GET "http://localhost/api/user/1"
+curl -X GET "http://localhost:8000/api/user/1"
 Response:
 
 json
@@ -115,7 +115,7 @@ Endpoint: PUT /api/user/{id}
 
 Request:
 
-curl -X PUT "http://localhost/api/user/1" \
+curl -X PUT "http://localhost:8000/api/user/1" \
 -H "Content-Type: application/json" \
 -d '{
   "name": "Updated User Name",
@@ -142,7 +142,7 @@ Endpoint: DELETE /api/user/{id}
 
 Request:
 
-curl -X DELETE "http://localhost/api/user/1"
+curl -X DELETE "http://localhost:8000/api/user/1"
 Response:
 
 {
@@ -154,7 +154,7 @@ Endpoint: GET /api/events
 
 Request:
 
-curl -X GET "http://localhost/api/events"
+curl -X GET "http://localhost:8000/api/events"
 Response:
 
 [
@@ -173,7 +173,7 @@ Endpoint: GET /api/events/{event}/attendees
 Request:
 
 
-curl -X GET "http://localhost/api/events/1/attendees"
+curl -X GET "http://localhost:8000/api/events/1/attendees"
 Response:
 
 [
