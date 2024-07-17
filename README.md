@@ -9,15 +9,47 @@
 
 ## About This Project
 
-Events Management using Laravel 10.3 with REST API
-This project demonstrates my proficiency in using Laravel 10.3 for events management and serves as a part of my portfolio. It includes:
+Events Management System using Laravel 10.3 with REST API
+This project is a demonstration of my proficiency in using Laravel 10.3 for managing events, attendees, and users through RESTful APIs. It includes:
 
-A MySQLite connection
-Database management using DB Browser
-Comprehensive endpoints (details to be updated in the README - Updates will be avaiable soon)
-This project is a proof of concept showcasing my skills in Laravel development.
+Database Management: Using MySQLite connection with DB Browser for database management.
+API Endpoints: Comprehensive API endpoints for CRUD operations on events, attendees, and users.
+Validation: Input validation to ensure data integrity.
+Relationships: Proper Eloquent relationships between models (Users, Events, and Attendees).
+This project showcases my ability to develop a full-featured application using Laravel, suitable for inclusion in my professional portfolio.
 
+## Code Structure
+### Controllers:
 
+#### AttendeeController.php: Manages CRUD operations for attendees.
+#### EventController.php: Manages CRUD operations for events.
+#### UserController.php: Manages CRUD operations for users.
+#### Models:
+
+### User.php: Defines the User model and its relationships.
+### Event.php: Defines the Event model and its relationships.
+### Attendee.php: Defines the Attendee model and its relationships.
+
+## Endpoints:
+
+### Attendees:
+#### GET /api/attendees: List all attendees.
+#### POST /api/attendees: Create a new attendee.
+#### GET /api/attendees/{id}: Show a specific attendee.
+#### PUT /api/attendees/{id}: Update a specific attendee.
+#### DELETE /api/attendees/{id}: Delete a specific attendee.
+### Events:
+#### GET /api/events: List all events.
+#### POST /api/events: Create a new event.
+#### GET /api/events/{id}: Show a specific event.
+#### PUT /api/events/{id}: Update a specific event.
+#### DELETE /api/events/{id}: Delete a specific event.
+### Users:
+#### GET /api/users: List all users.
+#### POST /api/users: Create a new user.
+#### GET /api/users/{id}: Show a specific user.
+#### PUT /api/users/{id}: Update a specific user.
+#### DELETE /api/users/{id}: Delete a specific user.
 
 ## Endpoints Documentation
 
