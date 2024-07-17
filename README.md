@@ -9,10 +9,15 @@
 
 ## About This Project
 
-Events management using Laravel 10.3, with Rest API.
-I used MySqlite connection, open the Database with DB Browser.
-For the remaining endpoints I will update the Readme
-This project is just a proof/demonstration that I know how to use Laravel for My Portfolio, 
+Events Management using Laravel 10.3 with REST API
+This project demonstrates my proficiency in using Laravel 10.3 for events management and serves as a part of my portfolio. It includes:
+
+A MySQLite connection
+Database management using DB Browser
+Comprehensive endpoints (details to be updated in the README - Updates will be avaiable soon)
+This project is a proof of concept showcasing my skills in Laravel development.
+
+
 
 ## Endpoints Documentation
 
