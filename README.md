@@ -99,8 +99,7 @@ Request:
 curl -X GET "http://localhost:8000/api/user/1"
 Response:
 
-json
-Copy code
+
 {
   "id": 1,
   "name": "New User",
