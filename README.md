@@ -11,10 +11,12 @@
 
 Events management using Laravel 10.3, with Rest API.
 I used MySqlite connection, open the Database with DB Browser.
+For the remaining endpoints I will update the Readme
+This project is just a proof/demonstration that I know how to use Laravel for My Portfolio, 
 
 ## Endpoints Documentation
 
-### 1. Create a User
+### Create a User
 **Endpoint:** `POST /api/user`
 
 **Description:** Create a new user.
